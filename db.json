@@ -1,0 +1,295 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "firstName": "Rajesh",
+      "lastName": "Kumar",
+      "email": "rajesh.kumar@hrportal.com",
+      "phone": "+91-9876543210",
+      "department": "Engineering",
+      "position": "Senior Software Engineer",
+      "dateOfJoining": "2021-03-15",
+      "status": "active",
+      "managerId": null
+    },
+    {
+      "id": 2,
+      "firstName": "Priya",
+      "lastName": "Sharma",
+      "email": "priya.sharma@hrportal.com",
+      "phone": "+91-9876543211",
+      "department": "Human Resources",
+      "position": "HR Manager",
+      "dateOfJoining": "2020-01-10",
+      "status": "active",
+      "managerId": null
+    },
+    {
+      "id": 3,
+      "firstName": "Amit",
+      "lastName": "Patel",
+      "email": "amit.patel@hrportal.com",
+      "phone": "+91-9876543212",
+      "department": "Engineering",
+      "position": "Software Engineer",
+      "dateOfJoining": "2022-06-20",
+      "status": "active",
+      "managerId": 1
+    },
+    {
+      "id": 4,
+      "firstName": "Sneha",
+      "lastName": "Gupta",
+      "email": "sneha.gupta@hrportal.com",
+      "phone": "+91-9876543213",
+      "department": "Marketing",
+      "position": "Marketing Executive",
+      "dateOfJoining": "2022-09-01",
+      "status": "active",
+      "managerId": null
+    },
+    {
+      "id": 5,
+      "firstName": "Vikram",
+      "lastName": "Singh",
+      "email": "vikram.singh@hrportal.com",
+      "phone": "+91-9876543214",
+      "department": "Sales",
+      "position": "Sales Manager",
+      "dateOfJoining": "2021-11-05",
+      "status": "active",
+      "managerId": null
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "priya.sharma@hrportal.com",
+      "password": "hashed_password_1",
+      "role": "hr",
+      "employeeId": 2
+    },
+    {
+      "id": 2,
+      "email": "rajesh.kumar@hrportal.com",
+      "password": "hashed_password_2",
+      "role": "employee",
+      "employeeId": 1
+    },
+    {
+      "id": 3,
+      "email": "amit.patel@hrportal.com",
+      "password": "hashed_password_3",
+      "role": "employee",
+      "employeeId": 3
+    }
+  ],
+  "leaveRequests": [
+    {
+      "id": 1,
+      "employeeId": 1,
+      "leaveType": "Casual Leave",
+      "startDate": "2024-02-10",
+      "endDate": "2024-02-12",
+      "reason": "Personal work",
+      "status": "approved",
+      "submittedDate": "2024-02-05",
+      "approvedBy": 2
+    },
+    {
+      "id": 2,
+      "employeeId": 3,
+      "leaveType": "Sick Leave",
+      "startDate": "2024-02-15",
+      "endDate": "2024-02-15",
+      "reason": "Medical appointment",
+      "status": "pending",
+      "submittedDate": "2024-02-14",
+      "approvedBy": null
+    },
+    {
+      "id": 3,
+      "employeeId": 4,
+      "leaveType": "Annual Leave",
+      "startDate": "2024-03-01",
+      "endDate": "2024-03-07",
+      "reason": "Vacation",
+      "status": "pending",
+      "submittedDate": "2024-02-20",
+      "approvedBy": null
+    },
+    {
+      "id": 4,
+      "employeeId": 5,
+      "leaveType": "Casual Leave",
+      "startDate": "2024-02-08",
+      "endDate": "2024-02-09",
+      "reason": "Family emergency",
+      "status": "approved",
+      "submittedDate": "2024-02-07",
+      "approvedBy": 2
+    },
+    {
+      "id": 5,
+      "employeeId": 1,
+      "leaveType": "Paid Time Off",
+      "startDate": "2024-02-20",
+      "endDate": "2024-02-21",
+      "reason": "Personal leave",
+      "status": "rejected",
+      "submittedDate": "2024-02-15",
+      "approvedBy": 2
+    },
+    {
+      "id": 6,
+      "employeeId": 3,
+      "leaveType": "Annual Leave",
+      "startDate": "2024-04-15",
+      "endDate": "2024-04-25",
+      "reason": "Summer vacation",
+      "status": "pending",
+      "submittedDate": "2024-02-10",
+      "approvedBy": null
+    }
+  ],
+  "onboarding": [
+    {
+      "id": 1,
+      "employeeId": 1,
+      "documents": [
+        {
+          "name": "Government ID",
+          "status": "uploaded",
+          "uploadedDate": "2021-03-10"
+        },
+        {
+          "name": "Offer Letter",
+          "status": "verified",
+          "uploadedDate": "2021-03-10"
+        },
+        {
+          "name": "Joining Form",
+          "status": "verified",
+          "uploadedDate": "2021-03-12"
+        }
+      ],
+      "status": "completed",
+      "assignedTasks": [
+        {
+          "taskId": 1,
+          "title": "System Access Setup",
+          "status": "completed",
+          "dueDate": "2021-03-15",
+          "completedDate": "2021-03-15"
+        },
+        {
+          "taskId": 2,
+          "title": "Company Orientation",
+          "status": "completed",
+          "dueDate": "2021-03-16",
+          "completedDate": "2021-03-16"
+        },
+        {
+          "taskId": 3,
+          "title": "Team Introduction",
+          "status": "completed",
+          "dueDate": "2021-03-17",
+          "completedDate": "2021-03-17"
+        }
+      ],
+      "completionDate": "2021-03-17"
+    },
+    {
+      "id": 2,
+      "employeeId": 3,
+      "documents": [
+        {
+          "name": "Government ID",
+          "status": "uploaded",
+          "uploadedDate": "2022-06-15"
+        },
+        {
+          "name": "Offer Letter",
+          "status": "verified",
+          "uploadedDate": "2022-06-15"
+        },
+        {
+          "name": "Educational Certificate",
+          "status": "pending",
+          "uploadedDate": null
+        }
+      ],
+      "status": "in-progress",
+      "assignedTasks": [
+        {
+          "taskId": 1,
+          "title": "System Access Setup",
+          "status": "completed",
+          "dueDate": "2022-06-20",
+          "completedDate": "2022-06-20"
+        },
+        {
+          "taskId": 2,
+          "title": "Company Orientation",
+          "status": "completed",
+          "dueDate": "2022-06-21",
+          "completedDate": "2022-06-21"
+        },
+        {
+          "taskId": 3,
+          "title": "Code Repository Access",
+          "status": "in-progress",
+          "dueDate": "2022-06-22",
+          "completedDate": null
+        }
+      ],
+      "completionDate": null
+    },
+    {
+      "id": 3,
+      "employeeId": 4,
+      "documents": [
+        {
+          "name": "Government ID",
+          "status": "uploaded",
+          "uploadedDate": "2022-08-28"
+        },
+        {
+          "name": "Offer Letter",
+          "status": "verified",
+          "uploadedDate": "2022-08-28"
+        },
+        {
+          "name": "Joining Form",
+          "status": "verified",
+          "uploadedDate": "2022-08-30"
+        }
+      ],
+      "status": "completed",
+      "assignedTasks": [
+        {
+          "taskId": 1,
+          "title": "System Access Setup",
+          "status": "completed",
+          "dueDate": "2022-09-01",
+          "completedDate": "2022-09-01"
+        },
+        {
+          "taskId": 2,
+          "title": "Company Orientation",
+          "status": "completed",
+          "dueDate": "2022-09-02",
+          "completedDate": "2022-09-02"
+        },
+        {
+          "taskId": 3,
+          "title": "Department Induction",
+          "status": "completed",
+          "dueDate": "2022-09-05",
+          "completedDate": "2022-09-05"
+        }
+      ],
+      "completionDate": "2022-09-05"
+    }
+  ]
+}

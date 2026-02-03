@@ -1,0 +1,19 @@
+{
+  "port": 5000,
+  "host": "localhost",
+  "watch": true,
+  "routes": {
+    "/api/employees": "/employees",
+    "/api/employees/:id": "/employees/:id",
+    "/api/users": "/users",
+    "/api/users/:id": "/users/:id",
+    "/api/leave-requests": "/leaveRequests",
+    "/api/leave-requests/:id": "/leaveRequests/:id",
+    "/api/onboarding": "/onboarding",
+    "/api/onboarding/:id": "/onboarding/:id"
+  },
+  "rewrite": {
+    "/api/*": "/$1"
+  },
+  "middlewares": []
+}
