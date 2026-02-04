@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectNotifications, removeNotification } from '@/store/notificationSlice';
 import NotificationItem from './NotificationItem';
@@ -20,7 +20,6 @@ import NotificationItem from './NotificationItem';
 function NotificationContainer() {
   const dispatch = useDispatch();
   const notifications = useSelector(selectNotifications);
-  const [displayedNotifications, setDisplayedNotifications] = useState([]);
 
   /**
    * Handle auto-dismiss of notifications
@@ -47,7 +46,10 @@ function NotificationContainer() {
    * Used for animation state tracking
    */
   useEffect(() => {
-    setDisplayedNotifications(notifications.map(n => n.id));
+    // Keep track of displayed notifications without setState
+    if (notifications && notifications.length > 0) {
+      notifications.map(n => n.id);
+    }
   }, [notifications]);
 
   /**

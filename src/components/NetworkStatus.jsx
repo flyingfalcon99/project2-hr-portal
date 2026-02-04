@@ -1,28 +1,22 @@
 import { useEffect, useState } from 'react';
-import { isOnline, waitForNetwork } from '../utils/errorHandler';
+import { isOnline } from '../utils/errorHandler';
 
 /**
  * NetworkStatus Component
  * Displays network connectivity status with visual indicator
  */
 const NetworkStatus = ({ position = 'bottom', showOnline = false }) => {
-  const [online, setOnline] = useState(isOnline());
-  const [wasOffline, setWasOffline] = useState(false);
+  const [online, setOnline] = useState(() => isOnline());
 
   useEffect(() => {
-    // Set initial state
-    setOnline(isOnline());
-
     // Handle online event
     const handleOnline = () => {
       setOnline(true);
-      setWasOffline(false);
     };
 
     // Handle offline event
     const handleOffline = () => {
       setOnline(false);
-      setWasOffline(true);
     };
 
     // Add event listeners

@@ -6,7 +6,6 @@ import useNotification from '@/store/useNotification';
 import FilterPanel from '@/components/FilterPanel';
 import {
   filterEmployees,
-  getUniqueDepartments,
   getUniquePositions,
   debounce,
   hasActiveFilters,

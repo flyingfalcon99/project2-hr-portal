@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useAppDispatch, useCurrentUser, useEmployeeLeaves, useLeaveLoading } from '@/store/hooks';
-import { fetchLeavesByEmployee, cancelLeave, clearError } from '@/store/leaveSlice';
-import axios from 'axios';
+import { fetchLeavesByEmployee, cancelLeave } from '@/store/leaveSlice';
+
 
 const API_BASE = 'http://localhost:5000/api';
 const LEAVE_TYPES = [

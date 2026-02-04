@@ -2,6 +2,7 @@
  * Responsive Design Utilities and Constants
  * Provides breakpoints, responsive helpers, and design patterns
  */
+import React from 'react';
 
 /**
  * Tailwind CSS Breakpoints

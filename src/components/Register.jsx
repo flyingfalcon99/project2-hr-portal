@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useEmployeeLoading, useEmployeeError, useEmployeeSuccess } from '@/store/hooks';
-import { createEmployee, clearError, clearSuccess } from '@/store/employeeSlice';
+import { useEmployeeLoading } from '@/store/hooks';
 import useNotification from '@/store/useNotification';
 import axios from 'axios';
 import FormField from './FormField';
@@ -13,7 +12,7 @@ import {
   formModes,
 } from '@/utils/validationSchemas';
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'http://localhost:3001';
 const DEPARTMENTS = [
   'Engineering',
   'Human Resources',
@@ -25,15 +24,10 @@ const DEPARTMENTS = [
 ];
 
 export default function Register() {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { success: successNotification, error: errorNotification } = useNotification();
   const loading = useEmployeeLoading();
-  const error = useEmployeeError();
-  const success = useEmployeeSuccess();
   const [step, setStep] = useState(1);
-  const [submitError, setSubmitError] = useState(null);
-  const [showSuccess, setShowSuccess] = useState(false);
 
   const {
     control,
@@ -86,8 +80,6 @@ export default function Register() {
 
   const onSubmit = async (data) => {
     try {
-      setSubmitError(null);
-
       // Check if email already exists
       const existingUsers = await axios.get(`http://localhost:5000/api/users?email=${data.email}`);
       if (existingUsers.data.length > 0) {
@@ -222,7 +214,7 @@ export default function Register() {
                   required
                   successMessage="Email format is valid"
                   icon={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   }
@@ -239,7 +231,7 @@ export default function Register() {
                   successMessage="Valid phone number"
                   hint="Format: +1-9876543210 or (987) 654-3210"
                   icon={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948.684l1.498 4.493a1 1 0 00.502.756l2.048 1.295a1 1 0 00-.096 1.697l-2.457 2.457a1 1 0 00-.096 1.697l3.452 3.452a1 1 0 001.697-.096l2.457-2.457a1 1 0 001.697.096l1.295 2.048a1 1 0 00.756.502l4.493 1.498a1 1 0 00.684-.948V5a2 2 0 00-2-2h-2.28a1 1 0 00-.948.684L9.552 3.684a1 1 0 00-.502.756L7.552 8.933a1 1 0 00.096 1.697l2.457 2.457a1 1 0 00.096 1.697L6.75 17.838a1 1 0 01-1.697-.096l-2.457-2.457a1 1 0 00-1.697.096L1.852 18.933a1 1 0 00-.756-.502L-1.493 17.435a1 1 0 00-.684.948v2.28a2 2 0 002 2h2.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 00-.502-.756l-2.048-1.295a1 1 0 00.096-1.697l2.457-2.457a1 1 0 00.096-1.697l-3.452-3.452a1 1 0 00-1.697.096l-2.457 2.457a1 1 0 00-1.697-.096l-1.295-2.048a1 1 0 00-.756-.502l-4.493-1.498a1 1 0 00-.684.948z" />
                     </svg>
                   }
@@ -261,7 +253,7 @@ export default function Register() {
                   rules={registerStep2Schema.department}
                   required
                   icon={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                     </svg>
                   }
@@ -276,7 +268,7 @@ export default function Register() {
                   required
                   successMessage="Valid position"
                   icon={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 0a2 2 0 100-4m0 4a2 2 0 110-4m0 0V4m0 2a2 2 0 100 4" />
                     </svg>
                   }
@@ -310,7 +302,7 @@ export default function Register() {
                   successMessage="Strong password"
                   hint="Must contain: uppercase, lowercase, number, and special character (@$!%*?&)"
                   icon={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                   }
@@ -329,7 +321,7 @@ export default function Register() {
                   required
                   successMessage={password && password === watch('confirmPassword') ? 'Passwords match' : undefined}
                   icon={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" />
                     </svg>
                   }
@@ -367,7 +359,7 @@ export default function Register() {
                   {isSubmitting || loading ? (
                     <>
                       <svg
-                        className="animate-spin -ml-1 mr-2 h-4 w-4 inline"
+                        className="animate-spin -ml-1 mr-2 h-4 w-4 inline flex-shrink-0"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"

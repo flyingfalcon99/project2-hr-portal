@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useCurrentUser } from '@/store/hooks';
 
@@ -21,7 +21,7 @@ const EMPLOYEE_MENU = [
 const getIcon = (iconName) => {
   const icons = {
     dashboard: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -31,7 +31,7 @@ const getIcon = (iconName) => {
       </svg>
     ),
     users: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -41,7 +41,7 @@ const getIcon = (iconName) => {
       </svg>
     ),
     calendar: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -51,7 +51,7 @@ const getIcon = (iconName) => {
       </svg>
     ),
     briefcase: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -61,7 +61,7 @@ const getIcon = (iconName) => {
       </svg>
     ),
     user: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -71,7 +71,7 @@ const getIcon = (iconName) => {
       </svg>
     ),
     history: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -81,7 +81,7 @@ const getIcon = (iconName) => {
       </svg>
     ),
     chart: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -91,17 +91,17 @@ const getIcon = (iconName) => {
       </svg>
     ),
     menu: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-6 h-6 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     ),
     close: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-6 h-6 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
       </svg>
     ),
     chevron: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5 flex-shrink-0 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
       </svg>
     ),
@@ -116,7 +116,6 @@ export default function Sidebar() {
 
   const [isOpen, setIsOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   // Menu based on role
   const menuItems = currentUser?.role === 'hr' ? HR_MENU : EMPLOYEE_MENU;
@@ -125,7 +124,6 @@ export default function Sidebar() {
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
-      setIsMobile(mobile);
       if (mobile) {
         setIsOpen(false);
       } else {
@@ -139,7 +137,8 @@ export default function Sidebar() {
   }, []);
 
   // Close mobile menu when route changes
-  useEffect(() => {
+  useLayoutEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobileMenuOpen(false);
   }, [location]);
 
@@ -182,7 +181,7 @@ export default function Sidebar() {
             title={isOpen ? 'Collapse sidebar' : 'Expand sidebar'}
           >
             <svg
-              className={`w-5 h-5 transition-transform ${!isOpen ? 'rotate-180' : ''}`}
+              className={`w-5 h-5 transition-transform flex-shrink-0 ${!isOpen ? 'rotate-180' : ''}`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

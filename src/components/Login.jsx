@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useIsAuthenticated, useAuthLoading, useAuthError } from '@/store/hooks';
-import { loginUser, clearError } from '@/store/authSlice';
+import { loginUser } from '@/store/authSlice';
 import useNotification from '@/store/useNotification';
-import useAsyncOperation from '@/hooks/useAsyncOperation';
 import FormField from './FormField';
 import LoadingSpinner from './LoadingSpinner';
 import { validationRules, formModes } from '@/utils/validationSchemas';
@@ -17,30 +16,28 @@ export default function Login() {
   const isAuthenticated = useIsAuthenticated();
   const loading = useAuthLoading();
   const error = useAuthError();
-  const [rememberMe, setRememberMe] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
-    watch,
+    formState: { isSubmitting },
   } = useForm({
     mode: formModes.LOGIN,
     defaultValues: {
-      email: localStorage.getItem('rememberedEmail') || '',
+      email: '',
       password: '',
       role: 'employee',
     },
   });
 
-  const selectedRole = watch('role');
-
   useEffect(() => {
     if (isAuthenticated) {
       successNotification('Login Successful!', 'Redirecting to dashboard...');
       setTimeout(() => {
-        navigate('/dashboard');
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const redirectPath = user.role === 'hr' ? '/hr/dashboard' : '/employee/dashboard';
+        navigate(redirectPath);
       }, 2000);
     }
   }, [isAuthenticated, navigate, successNotification]);
@@ -55,13 +52,6 @@ export default function Login() {
     const { email, password, role } = data;
 
     try {
-      // Remember email if checkbox is checked
-      if (rememberMe) {
-        localStorage.setItem('rememberedEmail', email);
-      } else {
-        localStorage.removeItem('rememberedEmail');
-      }
-
       // Dispatch login action with error handling
       const loginPromise = new Promise((resolve, reject) => {
         dispatch(loginUser({ email, password, role }))
@@ -118,34 +108,38 @@ export default function Login() {
               control={control}
               name="email"
               type="email"
-              label="Email Address"
+              label="Email Address:"
               placeholder="you@example.com"
               rules={validationRules.email}
               required
-              successMessage="Email format is valid"
+              // successMessage="Email format is valid"
+              layout="horizontal"
             />
 
             {/* Password Field */}
-            <FormField
-              control={control}
-              name="password"
-              type="password"
-              label="Password"
-              placeholder="Enter your password"
-              rules={{
-                required: 'Password is required',
-              }}
-              required
-              hint="Demo password: hashed_password_1 or hashed_password_2"
-            />
-
-            {/* Remember Me Checkbox */}
-            <FormField
-              control={control}
-              name="rememberMe"
-              type="checkbox"
-              placeholder="Remember my email"
-            />
+            <div className="flex items-center gap-4">
+              <FormField
+                control={control}
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                label="Password:"
+                placeholder="Enter your password"
+                rules={{
+                  required: 'Password is required',
+                }}
+                required
+                layout="horizontal"
+                className="flex-1"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="mb-2 px-3 py-2 text-secondary-600 hover:text-primary-600 transition-colors"
+                title={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? '🙈 Hide' : '👁️ Show'}
+              </button>
+            </div>
 
             {/* Submit Button */}
             <button
@@ -167,15 +161,14 @@ export default function Login() {
             <div className="space-y-2 text-xs">
               <div className="bg-secondary-50 p-2 rounded-lg border border-secondary-100">
                 <p className="text-secondary-900">
-                  <strong>Employee:</strong> rajesh.kumar@hrportal.com
+                  <strong>Employee:</strong> rajesh.kumar@hrportal.com / hashed_password_2
                 </p>
               </div>
               <div className="bg-secondary-50 p-2 rounded-lg border border-secondary-100">
                 <p className="text-secondary-900">
-                  <strong>HR Manager:</strong> priya.sharma@hrportal.com
+                  <strong>HR Manager:</strong> priya.sharma@hrportal.com / hashed_password_1
                 </p>
               </div>
-              <p className="text-secondary-500">Password: hashed_password_1 or hashed_password_2</p>
             </div>
           </div>
         </div>

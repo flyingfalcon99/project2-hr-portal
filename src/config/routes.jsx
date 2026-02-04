@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+
 
 // Public pages
 import Home from '@/pages/Home';
@@ -51,25 +51,25 @@ export const routes = [
     path: '/hr/dashboard',
     element: <Dashboard />,
     label: 'HR Dashboard',
-    requiredRole: 'HR Admin',
+    requiredRole: 'hr',
   },
   {
     path: '/hr/employees',
     element: <EmployeeManagement />,
     label: 'Employee Management',
-    requiredRole: 'HR Admin',
+    requiredRole: 'hr',
   },
   {
     path: '/hr/leave-requests',
     element: <LeaveRequestsPage />,
     label: 'Leave Requests',
-    requiredRole: 'HR Admin',
+    requiredRole: 'hr',
   },
   {
     path: '/hr/onboarding',
     element: <OnboardingDashboard />,
     label: 'Onboarding',
-    requiredRole: 'HR Admin',
+    requiredRole: 'hr',
   },
 
   // Employee Routes
@@ -77,25 +77,25 @@ export const routes = [
     path: '/employee/dashboard',
     element: <EmployeeDashboard />,
     label: 'Dashboard',
-    requiredRole: 'Employee',
+    requiredRole: 'employee',
   },
   {
     path: '/employee/profile',
     element: <EmployeeProfile />,
     label: 'My Profile',
-    requiredRole: 'Employee',
+    requiredRole: 'employee',
   },
   {
     path: '/employee/request-leave',
     element: <EmployeeOnboardingPortal />,
     label: 'Request Leave',
-    requiredRole: 'Employee',
+    requiredRole: 'employee',
   },
   {
     path: '/employee/my-leaves',
     element: <LeaveHistoryPage />,
     label: 'My Leave History',
-    requiredRole: 'Employee',
+    requiredRole: 'employee',
   },
 
   // Error Routes
@@ -121,21 +121,21 @@ export const getNavigationByRole = (role) => {
 
   const baseRoutes = routes.filter((route) => route.public && route.path !== '/');
 
-  if (role === 'HR Admin') {
+  if (role === 'hr') {
     return [
       ...baseRoutes,
       ...routes.filter(
         (route) =>
-          route.requiredRole === 'HR Admin' ||
+          route.requiredRole === 'hr' ||
           route.label === 'Onboarding'
       ),
     ];
   }
 
-  if (role === 'Employee') {
+  if (role === 'employee') {
     return [
       ...baseRoutes,
-      ...routes.filter((route) => route.requiredRole === 'Employee'),
+      ...routes.filter((route) => route.requiredRole === 'employee'),
     ];
   }
 
@@ -149,9 +149,9 @@ export const getNavigationByRole = (role) => {
  */
 export const getDefaultRedirect = (role) => {
   switch (role) {
-    case 'HR Admin':
+    case 'hr':
       return '/hr/dashboard';
-    case 'Employee':
+    case 'employee':
       return '/employee/dashboard';
     default:
       return '/';

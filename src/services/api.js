@@ -3,7 +3,6 @@ import {
   classifyError,
   getUserFriendlyMessage,
   logError,
-  isRetryableError,
   retryWithExponentialBackoff,
 } from '../utils/errorHandler';
 

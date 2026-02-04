@@ -18,7 +18,6 @@ export default function EmployeeProfile() {
   const fileInputRef = useRef(null);
 
   const [activeTab, setActiveTab] = useState('profile'); // 'profile', 'emergency', 'security'
-  const [profilePhoto, setProfilePhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
   const [actionLoading, setActionLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -28,7 +27,6 @@ export default function EmployeeProfile() {
   const {
     register: registerProfile,
     handleSubmit: handleSubmitProfile,
-    watch: watchProfile,
     formState: { errors: profileErrors },
     reset: resetProfile,
   } = useForm({
@@ -80,7 +78,6 @@ export default function EmployeeProfile() {
   const handlePhotoUpload = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      setProfilePhoto(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         setPhotoPreview(reader.result);
@@ -104,7 +101,7 @@ export default function EmployeeProfile() {
         })
       ).unwrap();
       setSuccess(true);
-      setProfilePhoto(null);
+      setPhotoPreview(null);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
       setError(err.message || 'Failed to update profile');
@@ -134,7 +131,7 @@ export default function EmployeeProfile() {
   };
 
   // Handle password change
-  const onSubmitPassword = async (data) => {
+  const onSubmitPassword = async () => {
     if (!passwordMatch) {
       setError('Passwords do not match');
       return;
@@ -148,7 +145,7 @@ export default function EmployeeProfile() {
       setSuccess(true);
       resetPassword();
       setTimeout(() => setSuccess(false), 3000);
-    } catch (err) {
+    } catch {
       setError('Failed to change password');
     } finally {
       setActionLoading(false);
@@ -315,7 +312,7 @@ export default function EmployeeProfile() {
                         type="tel"
                         {...registerProfile('phone', {
                           pattern: {
-                            value: /^[\d\s\-\+\(\)]+$/,
+                            value: /^[\d\s\-+()]+$/,
                             message: 'Invalid phone number format',
                           },
                         })}
@@ -514,7 +511,7 @@ export default function EmployeeProfile() {
                         {...registerEmergency('emergencyContactPhone', {
                           required: 'Phone number is required',
                           pattern: {
-                            value: /^[\d\s\-\+\(\)]+$/,
+                            value: /^[\d\s\-+()]+$/,
                             message: 'Invalid phone number format',
                           },
                         })}

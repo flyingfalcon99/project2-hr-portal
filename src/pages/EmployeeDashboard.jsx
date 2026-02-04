@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useCurrentUser, useEmployeeLeaves } from '@/store/hooks';
 import { fetchLeavesByEmployee } from '@/store/leaveSlice';
+import Layout from '@/components/Layout';
 
 const ANNOUNCEMENTS = [
   {
@@ -119,29 +120,30 @@ export default function EmployeeDashboard() {
 
   // Get announcement icon
   const getAnnouncementIcon = (icon) => {
+    const iconStyle = { width: '24px', height: '24px', maxWidth: '24px', maxHeight: '24px', display: 'block' };
     const icons = {
       calendar: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={iconStyle}>
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
       ),
       star: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+        <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style={iconStyle}>
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
         </svg>
       ),
       building: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={iconStyle}>
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m-1 4h1m4-4h1m-1 4h1m-5-10h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1z" />
         </svg>
       ),
       users: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={iconStyle}>
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 8.048M12 4.354L9.172 9.172M12 4.354l2.828 4.818M15 10.5H9m6 0a6 6 0 11-12 0 6 6 0 0112 0z" />
         </svg>
       ),
       mail: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={iconStyle}>
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       ),
@@ -150,24 +152,25 @@ export default function EmployeeDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-secondary-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white">
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold">Welcome back, {currentUser?.firstName}!</h1>
-          <p className="text-primary-100 mt-2">Here's what's happening with your account today</p>
+    <Layout>
+      <div className="min-h-screen bg-secondary-50">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white">
+          <div className="max-w-7xl mx-auto px-4 py-8">
+            <h1 className="text-4xl font-bold">Welcome back, {currentUser?.firstName}!</h1>
+            <p className="text-primary-100 mt-2">Here's what's happening with your account today</p>
+          </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Main Content */}
+        <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Welcome Card & Quick Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
           {/* Welcome Card */}
           <div className="lg:col-span-2 card">
             <div className="flex flex-col items-center text-center">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center mb-4 shadow-lg">
-                <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center mb-4 shadow-lg flex-shrink-0 overflow-hidden">
+                <svg className="w-12 h-12 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style={{ width: '48px', height: '48px', maxWidth: '48px', maxHeight: '48px', display: 'block' }}>
                   <path
                     fillRule="evenodd"
                     d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
@@ -229,8 +232,8 @@ export default function EmployeeDashboard() {
               onClick={() => navigate(action.path)}
               className={`card hover:shadow-lg transition-all group cursor-pointer`}
             >
-              <div className={`w-12 h-12 rounded-lg bg-${action.color}-100 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                <svg className={`w-6 h-6 text-${action.color}-600`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className={`w-12 h-12 rounded-lg bg-${action.color}-100 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform overflow-hidden`}>
+                <svg className={`w-6 h-6 text-${action.color}-600 flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: '24px', height: '24px', maxWidth: '24px', maxHeight: '24px', display: 'block' }}>
                   {action.icon === 'calendar' && (
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   )}
@@ -256,7 +259,7 @@ export default function EmployeeDashboard() {
           <div className="lg:col-span-2">
             <div className="card">
               <h3 className="text-xl font-bold text-secondary-900 mb-6 flex items-center gap-2">
-                <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-primary-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: '24px', height: '24px', maxWidth: '24px', maxHeight: '24px', display: 'block' }}>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -280,7 +283,7 @@ export default function EmployeeDashboard() {
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex items-start gap-3 flex-1">
-                        <div className="text-primary-600 flex-shrink-0 mt-1">
+                        <div className="text-primary-600 flex-shrink-0 mt-1 w-6 h-6 flex items-center justify-center">
                           {getAnnouncementIcon(announcement.icon)}
                         </div>
                         <div className="flex-1">
@@ -304,6 +307,7 @@ export default function EmployeeDashboard() {
                         className={`w-5 h-5 text-secondary-400 flex-shrink-0 transition-transform ${
                           expandedAnnouncement === announcement.id ? 'rotate-180' : ''
                         }`}
+                        style={{ minWidth: '1.25rem', width: '20px', height: '20px', maxWidth: '20px', maxHeight: '20px', display: 'block' }}
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -325,7 +329,7 @@ export default function EmployeeDashboard() {
           {/* Personal Information Summary */}
           <div className="card">
             <h3 className="text-lg font-bold text-secondary-900 mb-4 flex items-center gap-2">
-              <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-primary-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: '20px', height: '20px', maxWidth: '20px', maxHeight: '20px', display: 'block' }}>
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -378,7 +382,7 @@ export default function EmployeeDashboard() {
         {/* Leave Balance Details */}
         <div className="mt-8 card">
           <h3 className="text-lg font-bold text-secondary-900 mb-6 flex items-center gap-2">
-            <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-primary-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: '24px', height: '24px', maxWidth: '24px', maxHeight: '24px', display: 'block' }}>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -412,7 +416,8 @@ export default function EmployeeDashboard() {
             ))}
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }

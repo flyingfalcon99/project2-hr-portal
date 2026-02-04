@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { generateImageSrcSet, useIsMobile } from '../utils/responsiveUtils';
+import { generateImageSrcSet } from '../utils/responsiveUtils';
 
 /**
  * ResponsiveImage Component
@@ -28,7 +28,7 @@ const ResponsiveImage = ({
   ...props
 }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const isMobile = useIsMobile();
+
 
   const srcSet = responsive ? generateImageSrcSet(src, ['640', '1024', '1440']) : undefined;
 

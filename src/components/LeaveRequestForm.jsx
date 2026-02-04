@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useCurrentUser, useLeaveLoading, useLeaveError, useEmployeeLeaves } from '@/store/hooks';
-import { submitLeaveRequest, fetchLeavesByEmployee, clearError } from '@/store/leaveSlice';
+import { submitLeaveRequest, fetchLeavesByEmployee } from '@/store/leaveSlice';
 import FormField from './FormField';
 import SuccessMessage from './SuccessMessage';
 import { leaveRequestSchema, formModes } from '@/utils/validationSchemas';

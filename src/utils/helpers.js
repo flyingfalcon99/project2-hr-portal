@@ -195,7 +195,7 @@ export const validateEmail = (email) => {
  * @returns {boolean} True if valid phone
  */
 export const validatePhone = (phone) => {
-  const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
+  const phoneRegex = /^[\d\s\-+()]{10,}$/;
   return phoneRegex.test(phone.replace(/\s/g, ''));
 };
 
@@ -273,9 +273,10 @@ export const validateField = (fieldName, value) => {
     case 'zipcode':
     case 'zip':
       return validateZipCode(value) ? '' : 'Invalid ZIP code format (12345 or 12345-6789)';
-    case 'password':
+    case 'password': {
       const pwValidation = validatePassword(value);
       return pwValidation.isValid ? '' : pwValidation.feedback[0] || 'Invalid password';
+    }
     default:
       return '';
   }

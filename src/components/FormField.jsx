@@ -35,6 +35,7 @@ const FormField = ({
   successMessage,
   onChange,
   responsive = true,
+  layout = 'horizontal',
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -49,12 +50,12 @@ const FormField = ({
         const showSuccess = !hasError && isDirty && !isFocused && successMessage;
 
         return (
-          <div className={responsive ? 'space-y-2' : 'space-y-1.5'}>
+          <div className={layout === 'horizontal' ? 'flex items-center gap-4' : (responsive ? 'space-y-2' : 'space-y-1.5')}>
             {/* Label */}
             {label && (
               <label
                 htmlFor={name}
-                className={`block font-semibold text-secondary-900 ${responsive ? 'text-sm md:text-base' : 'text-sm'}`}
+                className={`${layout === 'horizontal' ? 'flex-shrink-0 w-32' : ''} font-semibold text-secondary-900 ${responsive ? 'text-sm md:text-base' : 'text-sm'}`}
               >
                 {label}
                 {required && <span className="text-danger-600 ml-1">*</span>}
@@ -62,7 +63,7 @@ const FormField = ({
             )}
 
             {/* Input Container */}
-            <div className="relative">
+            <div className={`relative ${layout === 'horizontal' ? 'flex-1' : ''}`}>
               {/* Textarea */}
               {type === 'textarea' ? (
                 <textarea
@@ -71,7 +72,7 @@ const FormField = ({
                   rows={rows || 4}
                   disabled={disabled}
                   onFocus={() => setIsFocused(true)}
-                  onBlur={(e) => {
+                  onBlur={() => {
                     setIsFocused(false);
                     field.onBlur();
                   }}
@@ -103,7 +104,7 @@ const FormField = ({
                   id={name}
                   disabled={disabled}
                   onFocus={() => setIsFocused(true)}
-                  onBlur={(e) => {
+                  onBlur={() => {
                     setIsFocused(false);
                     field.onBlur();
                   }}
@@ -208,7 +209,7 @@ const FormField = ({
                     placeholder={placeholder}
                     disabled={disabled}
                     onFocus={() => setIsFocused(true)}
-                    onBlur={(e) => {
+                    onBlur={() => {
                       setIsFocused(false);
                       field.onBlur();
                     }}
@@ -239,38 +240,12 @@ const FormField = ({
 
             {/* Success Message */}
             {showSuccess && (
-              <div className="flex items-start gap-2 mt-2">
-                <svg
-                  className="w-4 h-4 text-success-600 flex-shrink-0 mt-0.5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <p className="text-sm text-success-700">{successMessage}</p>
-              </div>
+              <p className="text-sm text-success-700">{successMessage}</p>
             )}
 
             {/* Error Message */}
             {hasError && (
-              <div className="flex items-start gap-2 mt-2">
-                <svg
-                  className="w-4 h-4 text-danger-600 flex-shrink-0 mt-0.5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M18.101 12.93a1 1 0 00-1.414-1.414L10 14.586 3.313 7.899a1 1 0 00-1.414 1.414l7.778 7.778a1 1 0 001.414 0l8.02-8.02z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <p className="text-sm text-danger-700">{error.message}</p>
-              </div>
+              <p className="text-sm text-danger-700">{error.message}</p>
             )}
 
             {/* Hint Text */}

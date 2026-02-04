@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useAppDispatch, useOnboarding, useOnboardingLoading, useOnboardingError } from '@/store/hooks';
-import { fetchOnboarding, updateTask, completeOnboarding, clearError } from '@/store/onboardingSlice';
+import { fetchOnboarding, updateTask, completeOnboarding } from '@/store/onboardingSlice';
 
 const DEPARTMENTS = ['HR', 'Engineering', 'Sales', 'Marketing', 'Finance', 'Operations'];
 
@@ -70,18 +70,6 @@ export default function OnboardingDashboard() {
   const isOverdue = (dueDate) => {
     if (!dueDate) return false;
     return new Date(dueDate) < new Date() && new Date(dueDate).toDateString() !== new Date().toDateString();
-  };
-
-  // Get status color for due date
-  const getDueDateStatus = (dueDate) => {
-    if (!dueDate) return 'neutral';
-    const today = new Date();
-    const due = new Date(dueDate);
-    const daysUntilDue = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
-
-    if (daysUntilDue < 0) return 'overdue';
-    if (daysUntilDue <= 2) return 'due-soon';
-    return 'on-track';
   };
 
   // Handle task completion

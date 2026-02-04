@@ -254,7 +254,7 @@ export default {
   },
 
   plugins: [
-    function ({ addComponents, addUtilities, theme }) {
+    function ({ addComponents, addUtilities }) {
       // ============================================================================
       // TEXT & TYPOGRAPHY COMPONENTS
       // ============================================================================

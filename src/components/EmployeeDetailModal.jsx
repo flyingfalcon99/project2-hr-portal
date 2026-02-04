@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
@@ -25,7 +25,6 @@ export default function EmployeeDetailModal({ employee, onClose, onSave, leaveHi
     handleSubmit,
     formState: { errors },
     reset,
-    watch,
   } = useForm({
     defaultValues: {
       firstName: employee?.firstName || '',

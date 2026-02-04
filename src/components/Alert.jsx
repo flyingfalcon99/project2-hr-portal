@@ -23,24 +23,29 @@ const Alert = ({
   className = '',
   children,
 }) => {
-  const [isVisible, setIsVisible] = useState(visible);
-
-  useEffect(() => {
-    setIsVisible(visible);
-
-    if (visible && autoClose > 0) {
-      const timer = setTimeout(() => {
-        handleClose();
-      }, autoClose);
-
-      return () => clearTimeout(timer);
-    }
-  }, [visible, autoClose]);
+  const [isVisible, setIsVisible] = useState(() => visible);
 
   const handleClose = () => {
     setIsVisible(false);
     if (onClose) onClose();
   };
+
+  useEffect(() => {
+    if (!visible) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIsVisible(false);
+      return;
+    }
+
+    if (autoClose > 0) {
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+        if (onClose) onClose();
+      }, autoClose);
+
+      return () => clearTimeout(timer);
+    }
+  }, [visible, autoClose, onClose]);
 
   if (!isVisible) return null;
 

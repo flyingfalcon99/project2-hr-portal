@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
-import Sidebar from './Sidebar';
 import NotificationContainer from './NotificationContainer';
 
 const BREADCRUMB_LABELS = {
@@ -36,15 +35,12 @@ export default function Layout({ children }) {
   }, [location.pathname]);
 
   return (
-    <div className="flex h-screen bg-secondary-50">
+    <div className="flex flex-col h-screen bg-secondary-50">
       {/* Notification Container */}
       <NotificationContainer />
 
-      {/* Sidebar */}
-      <Sidebar />
-
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-hidden md:ml-64">
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Navbar */}
         <Navbar />
 
@@ -70,7 +66,7 @@ export default function Layout({ children }) {
                     Back
                   </button>
 
-                  {breadcrumbs.map((breadcrumb, index) => (
+                  {breadcrumbs.map((breadcrumb) => (
                     <div key={breadcrumb.path} className="flex items-center space-x-2">
                       <span className="text-secondary-400">/</span>
                       <span className="text-secondary-700">{breadcrumb.label}</span>

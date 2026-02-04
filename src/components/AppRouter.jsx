@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import NotificationContainer from '@/components/NotificationContainer';
 import { routes } from '@/config/routes';
@@ -11,7 +11,6 @@ import { routes } from '@/config/routes';
  */
 export default function AppRouter() {
   const dispatch = useDispatch();
-  const isInitialized = useSelector((state) => state.auth?.initialized);
 
   // Initialize auth state on app load
   useEffect(() => {
@@ -21,7 +20,7 @@ export default function AppRouter() {
       try {
         JSON.parse(savedUser);
         // User data is already in localStorage, will be loaded by Redux persist
-      } catch (error) {
+      } catch {
         localStorage.removeItem('currentUser');
       }
     }

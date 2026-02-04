@@ -599,7 +599,7 @@ export default function EmployeeOnboardingPortal() {
               <div className="space-y-8">
                 {onboarding?.tasks && onboarding.tasks.length > 0 && (
                   <>
-                    {onboarding.tasks.map((task, idx) => (
+                    {onboarding.tasks.map((task) => (
                       <div key={task.id} className="relative pl-16">
                         <div
                           className={`w-10 h-10 rounded-full absolute left-0 flex items-center justify-center ${

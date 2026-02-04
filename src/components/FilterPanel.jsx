@@ -55,9 +55,8 @@ function FilterPanel({ filters, onFilterChange, filterGroups, filterCounts = {},
     onFilterChange(clearedFilters);
   };
 
-  const activeFilterCount = Object.entries(filters).filter(([key, value]) => {
-    const group = filterGroups.find((g) => g.name === key);
-    if (!value || value === '' || value === 'All Departments' || value === 'All Status' || value === 'All Types' || value === 'All Positions') {
+  const activeFilterCount = Object.entries(filters).filter(([key]) => {
+    if (!filters[key] || filters[key] === '' || filters[key] === 'All Departments' || filters[key] === 'All Status' || filters[key] === 'All Types' || filters[key] === 'All Positions') {
       return false;
     }
     return true;

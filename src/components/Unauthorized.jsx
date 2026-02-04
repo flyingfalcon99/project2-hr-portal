@@ -12,10 +12,12 @@ export default function Unauthorized() {
         <div className="mb-6">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-danger-100 rounded-full">
             <svg
-              className="w-8 h-8 text-danger-600"
+              className="w-8 h-8 text-danger-600 flex-shrink-0 inline-block"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              width="32"
+              height="32"
             >
               <path
                 strokeLinecap="round"

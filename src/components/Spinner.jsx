@@ -17,23 +17,6 @@ const Spinner = ({
   fullScreen = false,
   className = '',
 }) => {
-  // Size variants
-  const sizeStyles = {
-    sm: 'w-6 h-6',
-    md: 'w-10 h-10',
-    lg: 'w-14 h-14',
-    xl: 'w-20 h-20',
-  };
-
-  // Color variants
-  const colorClasses = {
-    primary: 'text-primary-600',
-    secondary: 'text-secondary-600',
-    success: 'text-success-600',
-    danger: 'text-danger-600',
-    white: 'text-white',
-  };
-
   const container = fullScreen ? (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <SpinnerContent size={size} variant={variant} color={color} label={label} className={className} />
@@ -66,7 +49,7 @@ const SpinnerContent = ({ size, variant, color, label, className }) => {
     return (
       <div className={`flex flex-col items-center gap-3 ${className}`}>
         <div className={`${sizeStyles[size]}`}>
-          <svg className={`animate-spin ${colorClasses[color]}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <svg className={`animate-spin ${colorClasses[color]} flex-shrink-0 inline-block`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
             <path
               className="opacity-75"

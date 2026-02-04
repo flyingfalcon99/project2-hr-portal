@@ -385,7 +385,7 @@ export const customValidators = {
     try {
       const response = await apiCall(email);
       return !response.exists;
-    } catch (error) {
+    } catch {
       return true; // Allow submission on API error
     }
   },

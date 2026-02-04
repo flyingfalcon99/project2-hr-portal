@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useAppDispatch, useLeaveRequests, useLeaveLoading, useEmployees } from '@/store/hooks';
-import { fetchLeaveRequests, approveLeave, rejectLeave, clearError } from '@/store/leaveSlice';
+import { fetchLeaveRequests, approveLeave, rejectLeave } from '@/store/leaveSlice';
 import { useCurrentUser } from '@/store/hooks';
 import useNotification from '@/store/useNotification';
 import FilterPanel from '@/components/FilterPanel';
@@ -10,7 +10,6 @@ import {
   getLeaveCountByStatus,
   debounce,
   hasActiveFilters,
-  formatDateRange,
 } from '@/utils/filterUtils';
 import axios from 'axios';
 
@@ -168,7 +167,7 @@ export default function LeaveRequests() {
         await axios.patch(`${API_BASE}/leave-requests/${leaveId}`, {
           rejectionReason: rejectionComment,
         });
-      } catch (commentErr) {
+      } catch {
         console.log('Comment save failed but rejection succeeded');
       }
 
